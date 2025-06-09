@@ -1,10 +1,27 @@
-output "nginx_ingress_lb_dns" {
-  value = data.aws_lb.nginx_ingress.dns_name
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = aws_vpc.vpc-main.id
+  sensitive = true
+  
 }
 
-output "nginx_lb_ip" {
-  value = data.aws_lb.nginx_ingress.ip_address_type == "ipv4" ? data.aws_lb.nginx_ingress.dns_name : ""
+output "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  value       = aws_subnet.private_subnet[*].id
 }
-output "nginx_ingress_load_balancer_hostname" {
-  value = data.aws_lb.nginx_ingress.dns_name
+output "public_subnet_ids" {
+  description = "List of public subnet IDs"
+  value       = aws_subnet.public_subnet[*].id
+}
+
+
+output "private_subnet_db_ids" {
+  description = "List of private subnet IDs"
+  value       = aws_subnet.private_subnet_db[*].id
+}
+
+output "aws_security_group_ids" {
+  description = "List of security group IDs"
+  value       = aws_security_group.mysql_sg.id
+  
 }
